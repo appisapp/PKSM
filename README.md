@@ -1,60 +1,41 @@
-# PKSM
+# PKtimemachine
 
-*AIO save editor for NDS/3DS pkmn games*
-
----
-
-Formerly known as **EventAssistant**, this app allows you to:
-
-* **Inject more than 1660 wondercards** in your games, from **HGSS to Sun/Moon**;
-* **Edit your boxes and clone** stuff with a intuitive touch interface;
-* **Free integrated bank** with **up to 150 boxes** to store your stuff offline and **transfer your gen6 stuff to gen7 games!**;
-* Editor to **set money, items** and much more;
-* Multiple functions to check which event distribution is active;
-* more to discover!
+*A 3DS homebrew tool to send your Pokemon backwards through generations.*
 
 ---
 
-<img src="http://i.imgur.com/8bEucGD.jpg" width="400" /> <img src="http://i.imgur.com/54DGcsk.jpg" width="400" />
-<img src="http://i.imgur.com/VKdTKZb.jpg" width="400" /> <img src="http://i.imgur.com/FpqDecP.jpg" width="400" />
-<img src="http://i.imgur.com/txwEZQ2.jpg" width="400" /> <img src="http://i.imgur.com/msspq0G.jpg" width="400" />
+Longer description coming soon...
+
+---
+
+Images coming soon...
 
 ---
  
 **Thanks to**:
 
-* @dsoldier for the gorgeous graphic work
-* Smealum for ctrulib, Xerpi for sf2d
+* BernardoGiordano for PKSM, which handles most of this app's backend
+* Smealum for ctrulib
 * Kaphotics for PKHeX and being an awesome guy
-* SciresM for C-memecrypto, you rock man
-* J-K-D for direct save import/export and being awesome
+* SciresM for C-memecrypto
+* J-K-D for direct save import/export
 * Slashcash for PCHex++ and Strackeror for PCHex
 * Gocario for PKBrew
 * TuxSH for TWLSaveTool
-* MarcusD for romfs support
-* Nba_Yoh for received flags fix
-* Hamcha for cybertrust.h and digicert.h
-* PPorg for most of wc6/wc7 included here
-* Simona, Carlo, Matteo for fill.c work
-* Shai, Federico, YodaDaCoda, /u/SatansRoommate for tests
-* Alex, Immersion, Hat3Mond4ys, sgtkwol for descriptions
-* Paul, Kian for a few wc6
-* Majickhat55 for few collections and descriptions
-* Poutros for N's collection
+* Various other people involved in PKSM and related projects
 
 ---
 
 # How to compile it?
 
-You need latest ctrulib, sf2d, sftd, sfil, citro3d and Xerpi's portlibs. You need a rsf template to be able to compile a .cia build.
 
 ---
 
 # License
 
-This file is part of PKSM
+This file is part of PKtimemachine
 
-Copyright (C) 2016 Bernardo Giordano
+Copyright (C) 2016 LeifEricson
 
 This software is provided 'as-is', without any express or implied warranty.
  
@@ -67,7 +48,3 @@ In no event will the authors be held liable for any damages arising from the use
 
 
 Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
-
----
-
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/BernardoGiordano)
