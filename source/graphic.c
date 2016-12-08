@@ -50,12 +50,13 @@ void GUIElementsInit() {
 	warningBottomTrasp = sfil_load_PNG_file("romfs:/res/Warning Bottom Trasp.png", SF2D_PLACE_RAM);
 	
 	init_font_cache();
+	
+	alternativeSpritesSmall = sfil_load_PNG_file("/pk/romfs/alternativeSpritesSmall.png", SF2D_PLACE_RAM);
+	spritesSmall = sfil_load_PNG_file("/pk/romfs/pokemon_icons_spritesheet.png", SF2D_PLACE_RAM);
+	shinySpritesSmall = sfil_load_PNG_file("/pk/romfs/pokemon_shiny_icons_spritesheet.png", SF2D_PLACE_RAM);
 }
 
 void GUIElementsSpecify(int game) {
-	alternativeSpritesSmall = sfil_load_PNG_file("romfs:/res/alternativeSpritesSmall.png", SF2D_PLACE_RAM);
-	spritesSmall = sfil_load_PNG_file("romfs:/res/spritesSmall.png", SF2D_PLACE_RAM);
-	shinySpritesSmall = sfil_load_PNG_file("romfs:/res/shinySpritesSmall.png", SF2D_PLACE_RAM);
 	settings = sfil_load_PNG_file("romfs:/res/Settings.png", SF2D_PLACE_RAM);
 	
 	if (game < 6) {
@@ -943,7 +944,7 @@ void printDB6(int sprite, int i, bool langVett[], bool adapt, bool overwrite, in
 	free(path);
 }
 
-void printEditor(int currentEntry, int langCont, int badgeCont) {
+void printEditor(u8* mainbuf, int game, int currentEntry, int langCont, int badgeCont) {
 	int y = 41;
 	char *languages[] = {"JPN", "ENG", "FRE", "ITA", "GER", "SPA", "KOR", "CHS", "CHT"};
 	char *badges = (char*)malloc(2 * sizeof(char));
@@ -967,25 +968,10 @@ void printEditor(int currentEntry, int langCont, int badgeCont) {
 					sftd_draw_text(fontBold12, x + (36 - sftd_get_text_width(fontBold12, 12, languages[langCont])) / 2, y + 13, WHITE, 12, languages[langCont]);
 					break;
 				}
-				case 1 : {
-					int x = 140;
-					sftd_draw_text(fontBold12, 40, y + 13, DARKGREY, 12, "Battle Points:");
-					sf2d_draw_texture(darkButton, x, y + 10);
-					sftd_draw_text(fontBold12, x + (36 - sftd_get_text_width(fontBold12, 12, "MAX")) / 2, y + 13, WHITE, 12, "MAX");
-					break;
-				}
-				case 2 : {
-					sftd_draw_text(fontBold12, 18 + (182 - sftd_get_text_width(fontBold12, 12, "Placeholder")) / 2, y + 13, DARKGREY, 12, "Placeholder");
-					break;
-				}
-				case 3 : {
-					sftd_draw_text(fontBold12, 18 + (182 - sftd_get_text_width(fontBold12, 12, "Set Heals to max")) / 2, y + 13, DARKGREY, 12, "Set Heals to max");
-					break;
-				}
-				case 4 : {
-					sftd_draw_text(fontBold12, 18 + (182 - sftd_get_text_width(fontBold12, 12, "Set Items to max")) / 2, y + 13, DARKGREY, 12, "Set Items to max");
-					break;
-				}
+				case 1 : { sftd_draw_text(fontBold12, 18 + (182 - sftd_get_text_width(fontBold12, 12, "Set Heals to max")) / 2, y + 13, DARKGREY, 12, "Set Heals to max"); break; }
+				case 2 : { sftd_draw_text(fontBold12, 18 + (182 - sftd_get_text_width(fontBold12, 12, "Set Items to max")) / 2, y + 13, DARKGREY, 12, "Set Items to max"); break; }
+				case 3 : { sftd_draw_text(fontBold12, 18 + (182 - sftd_get_text_width(fontBold12, 12, "Set Berries to max")) / 2, y + 13, DARKGREY, 12, "Set Berries to max"); break; }
+				case 4 : { sftd_draw_text(fontBold12, 18 + (182 - sftd_get_text_width(fontBold12, 12, "Set all TMs")) / 2, y + 13, DARKGREY, 12, "Set all TMs"); break; }
 			}
 			
 			y += eventMenuTopBarSelected->height;
@@ -1001,30 +987,12 @@ void printEditor(int currentEntry, int langCont, int badgeCont) {
 			switch (i) {
 				case 5 : {
 					int x = 310;
-					sftd_draw_text(fontBold12, 240, y + 13, DARKGREY, 12, "Money:");
-					sf2d_draw_texture(darkButton, x, y + 10);
-					sftd_draw_text(fontBold12, x + (36 - sftd_get_text_width(fontBold12, 12, "MAX")) / 2, y + 13, WHITE, 12, "MAX");
-					break;
-				}
-				case 6 : {
-					int x = 310;
 					sftd_draw_text(fontBold12, 240, y + 13, DARKGREY, 12, "Badges:");
 					sf2d_draw_texture(darkButton, x, y + 10);
 					sftd_draw_text(fontBold12, x + (36 - sftd_get_text_width(fontBold12, 12, badges)) / 2, y + 13, WHITE, 12, badges);
 					break;
 				}
-				case 7 : {
-					sftd_draw_text(fontBold12, 200 + (182 - sftd_get_text_width(fontBold12, 12, "Set all TMs")) / 2, y + 13, DARKGREY, 12, "Set all TMs");
-					break;
-				}
-				case 8 : {
-					sftd_draw_text(fontBold12, 200 + (182 - sftd_get_text_width(fontBold12, 12, "Clear Mystery Gift box")) / 2, y + 13, DARKGREY, 12, "Clear Mistery Gift box");
-					break;
-				}
-				case 9 : {
-					sftd_draw_text(fontBold12, 200 + (182 - sftd_get_text_width(fontBold12, 12, "Set Berries to max")) / 2, y + 13, DARKGREY, 12, "Set Berries to max");
-					break;
-				}
+				case 6 : { sftd_draw_text(fontBold12, 200 + (182 - sftd_get_text_width(fontBold12, 12, "Clear Mystery Gift box")) / 2, y + 13, DARKGREY, 12, "Clear Mistery Gift box"); break; }
 			}
 			
 			y += eventMenuTopBarSelected->height;
@@ -1034,6 +1002,20 @@ void printEditor(int currentEntry, int langCont, int badgeCont) {
 	sf2d_start_frame(GFX_BOTTOM, GFX_LEFT);
 		sf2d_draw_texture(mainMenuBottom, 0, 0);
 		sf2d_draw_texture(back, 298, 207);
+		
+		y = 32;
+		// money
+		sftd_draw_textf(fontBold11, 15, y + 1, BLACK, 11, "Money: %u$", getMoney(mainbuf, game));
+		sf2d_draw_texture(darkButton, 260, y - 3);
+		sftd_draw_text(fontBold12, 266, y, WHITE, 12, "SET"); 
+		y += 24;
+		
+		// BP
+		sftd_draw_textf(fontBold11, 15, y + 1, BLACK, 11, "Battle Points: %hu", getBP(mainbuf, game));
+		sf2d_draw_texture(darkButton, 260, y - 3);
+		sftd_draw_text(fontBold12, 266, y, WHITE, 12, "SET"); 
+		y += 24;
+
 		sftd_draw_text(fontBold9, (320 - sftd_get_text_width(fontBold9, 9, "Press START to edit, A to toggle, B to exit.")) / 2, 226, WHITE, 9, "Press START to edit, A to toggle, B to exit.");
 	sf2d_end_frame();
 	sf2d_swapbuffers();
@@ -1691,43 +1673,4 @@ void printSettings(int box, bool speedy, int game) {
 	
 	free(bakpath);
 	free(bankbakpath);
-}
-
-void printSaveEditorMenu(u8* mainbuf, int game, bool speedy) {
-	int y = 32;
-	
-	sf2d_start_frame(GFX_TOP, GFX_LEFT);
-		drawMenuTop(0);
-	sf2d_end_frame();
-	
-	sf2d_start_frame(GFX_BOTTOM, GFX_LEFT);
-		sf2d_draw_texture(mainMenuBottom, 0, 0);
-		sf2d_draw_texture(back, 298, 207);
-		
-/*
-		sftd_draw_textf(fontBold11, 15, y + 1, BLACK, 11, "Bank size: %d boxes", box);
-		sf2d_draw_texture(darkButton, 220, y - 3);
-		sf2d_draw_texture(minus, 223, y + 1);
-		sf2d_draw_texture(plus, 240, y + 1);
-		sf2d_draw_texture(darkButton, 260, y - 3);
-		sftd_draw_text(fontBold12, 268, y, WHITE, 12, "OK");  */
-		
-		// money
-		sftd_draw_textf(fontBold11, 15, y + 1, BLACK, 11, "Money: %u$", getMoney(mainbuf, game));
-		sf2d_draw_texture(darkButton, 260, y - 3);
-		sftd_draw_text(fontBold12, 266, y, WHITE, 12, "SET"); 
-		y += 24;
-		
-		// BP
-		sftd_draw_textf(fontBold11, 15, y + 1, BLACK, 11, "Battle Points: %hu", getBP(mainbuf, game));
-		sf2d_draw_texture(darkButton, 260, y - 3);
-		sftd_draw_text(fontBold12, 266, y, WHITE, 12, "SET"); 
-		y += 24;
-		
-		
-
-		sftd_draw_textf(fontBold9, 15, 200, DARKGREY, 9, "You can switch speed using (L/R): %s", speedy ? "FAST" : "SLOW");
-		sftd_draw_text(fontBold9, (320 - sftd_get_text_width(fontBold9, 9, "Press B to return.")) / 2, 226, WHITE, 9, "Press B to return.");
-	sf2d_end_frame();
-	sf2d_swapbuffers();
 }
